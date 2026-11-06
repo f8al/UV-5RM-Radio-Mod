@@ -85,15 +85,28 @@ keep whatever channels it already had.
 To choose which channels get scanned, open `UV-5RM_Scan_Builder.html`, tick the ones you want, and
 load the CSV it saves into the uploader.
 
-Optional extras: `set_boot_tune.py` sets a Doom-style start-up riff, and `set_radio2_mario_tune.py`
-sets a Super Mario one but only runs on one specific radio, so copy and edit it for yours.
+**7. Set a start-up tune (optional).** The unified tune tool supports named presets:
 
-If using either `set_boot_tune.py` or `set_radio2_mario_tune.py` the syntax is as follows:
+| Preset | Also accepted | Length | Notes |
+|---|---|---:|---|
+| `doom` | *(default when omitted)* | 2.43 s | Doom-style riff |
+| `zelda` | `song_of_storms`, `storms` | 7.14 s | Song of Storms melody |
+| `mario` | | 2.04 s | Sequence from the older radio-two Mario script |
+| `purple-hat` | `purple_hat` | 2.58 s | Guitar riff transposed up one octave to fit the firmware's A2 floor |
 
-`py .\source-changes\set_boot_tune.py COMPORT backup-file-name.bin`
-or
+Run the command from the `UV-5RM Custom Firmware` folder, replacing `COM3` and the preset as needed:
 
-`py .\source-changes\set_radio2_mario_tune.py COMPORT backup-file-name.bin`
+```
+py source-changes\set_boot_tune.py COM3 my-backup\boot-tune-before.bin zelda
+```
+
+The second argument must be a **file name**, not a directory such as `.`. Its parent directory must
+already exist. The script saves the radio's 168-byte settings record there before writing the tune,
+then reads the settings back to verify that nothing else changed. If you omit the preset, it uses
+`doom`. Enable the radio's boot sound in `SETTINGS` if it is currently off.
+
+`set_radio2_mario_tune.py` is retained as a reference; use the unified command above with `mario`
+for normal use.
 
 ## Using TEXT
 
