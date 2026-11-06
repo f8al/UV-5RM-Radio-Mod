@@ -88,6 +88,13 @@ load the CSV it saves into the uploader.
 Optional extras: `set_boot_tune.py` sets a Doom-style start-up riff, and `set_radio2_mario_tune.py`
 sets a Super Mario one but only runs on one specific radio, so copy and edit it for yours.
 
+If using either `set_boot_tune.py` or `set_radio2_mario_tune.py` the syntax is as follows:
+
+`py .\source-changes\set_boot_tune.py COMPORT backup-file-name.bin`
+or
+
+`py .\source-changes\set_radio2_mario_tune.py COMPORT backup-file-name.bin`
+
 ## Using TEXT
 
 Both radios need `TEXT` open, on the same simplex frequency. It uses the frequency the radio was on
