@@ -70,12 +70,21 @@ the cable. The long number is a checksum, and the tool refuses a file that doesn
 py source-changes\flash_bf.py UV-5RM_Custom_Firmware.BF COM3 4340f205430f0741
 ```
 
-**4. Install the logo and apps.** Wait for the radio to restart to its main screen. This reads
-everything back to confirm it.
+**4. Install the logo and apps.** Wait for the radio to restart to its main screen. Choose one of
+the included 160x128 RGB565 logos; the command reads everything back to confirm it.
+
+| File | Design |
+|---|---|
+| `skull_logo.rgb565` | Original skull logo |
+| `OOT.rgb565` | The Legend of Zelda: Ocarina of Time logo |
+| `zelda.rgb565` | White Zelda crest on black |
 
 ```
 py source-changes\setup_radio.py COM3 skull_logo.rgb565 64 apps
 ```
+
+Replace `skull_logo.rgb565` in that command with `OOT.rgb565` or `zelda.rgb565` to install a
+different bundled logo.
 
 **5. Turn on transmit.** It starts off as a safety step. Go to `SETTINGS` and set `TXINH` to off.
 
@@ -109,9 +118,16 @@ then reads the settings back to verify that nothing else changed. If you omit th
 `set_radio2_mario_tune.py` is retained as a reference; use the unified command above with `mario`
 for normal use.
 
-**8. Install a custom boot logo (optional).** Images are fitted to the 160x128 display, composited
-over black, converted to the radio's RGB565 format, and previewed after color conversion. Preview an
-image locally without touching the radio:
+**8. Install a custom boot logo (optional).** To switch to one of the bundled RGB565 logos later,
+save the currently installed logo and write the selected file with:
+
+```
+py source-changes\set_boot_logo.py restore COM3 zelda.rgb565 --current-backup my-logo-backup.rgb565
+```
+
+Use `OOT.rgb565` instead to install the Ocarina of Time design. To create your own logo, images are
+fitted to the 160x128 display, composited over black, converted to the radio's RGB565 format, and
+previewed after color conversion. Preview an image locally without touching the radio:
 
 ```
 py source-changes\set_boot_logo.py preview photo.png --preview logo-preview.png --fit contain
