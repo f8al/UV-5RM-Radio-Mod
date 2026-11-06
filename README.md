@@ -39,7 +39,8 @@ This firmware only fits one hardware version. Radios that look identical can hav
 ## What you need
 
 - A Windows PC. The tools are Python, so other systems may work, but they're untested.
-- [Python](https://www.python.org/downloads/), plus the serial library: `py -m pip install pyserial`
+- [Python](https://www.python.org/downloads/), plus the required libraries:
+  `py -m pip install pyserial pillow`
 - A Baofeng programming cable. The commands below assume `COM3`, so change it to match your port.
 
 Run these from the `UV-5RM Custom Firmware` folder.
@@ -107,6 +108,34 @@ then reads the settings back to verify that nothing else changed. If you omit th
 
 `set_radio2_mario_tune.py` is retained as a reference; use the unified command above with `mario`
 for normal use.
+
+**8. Install a custom boot logo (optional).** Images are fitted to the 160x128 display, composited
+over black, converted to the radio's RGB565 format, and previewed after color conversion. Preview an
+image locally without touching the radio:
+
+```
+py source-changes\set_boot_logo.py preview photo.png --preview logo-preview.png --fit contain
+```
+
+When the preview looks right, upload it while saving the currently installed logo first:
+
+```
+py source-changes\set_boot_logo.py upload COM3 photo.png logo-backup.rgb565 --preview logo-preview.png
+```
+
+The uploader skips an identical logo and reads the entire write back for verification. If
+verification fails, it restores the original automatically. A backup can also be restored later:
+
+```
+py source-changes\set_boot_logo.py restore COM3 logo-backup.rgb565
+```
+
+Keep the `.rgb565` backup: it is the exact logo previously read from your radio. Backup files named
+`*-backup.rgb565` are ignored by Git so they are not accidentally committed.
+
+Set `SETTINGS` -> `BOOTSCR` to `LOGO`. The logo is also dimmed behind menus, so a dark background
+and a centered subject usually keep menu text easiest to read. Use `--fit cover` to crop and fill the
+screen or `--fit stretch` to ignore the source aspect ratio.
 
 ## Using TEXT
 
