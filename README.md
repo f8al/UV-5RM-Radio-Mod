@@ -90,9 +90,9 @@ load the CSV it saves into the uploader.
 | Preset | Also accepted | Length | Notes |
 |---|---|---:|---|
 | `doom` | *(default when omitted)* | 2.43 s | Doom-style riff |
-| `zelda` | `song_of_storms`, `storms` | 7.14 s | Song of Storms melody |
+| `zelda` | | 6.12 s | Opening phrase from the Legend of Zelda NES title theme |
+| `song_of_storms` | `storms` | 7.14 s | Song of Storms melody |
 | `mario` | | 2.04 s | Sequence from the older radio-two Mario script |
-| `purple-hat` | `purple_hat` | 2.58 s | Guitar riff transposed up one octave to fit the firmware's A2 floor |
 
 Run the command from the `UV-5RM Custom Firmware` folder, replacing `COM3` and the preset as needed:
 
